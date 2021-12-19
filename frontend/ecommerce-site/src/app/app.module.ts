@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 import { SearchComponent } from './components/search/search.component';
-// import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { SearchComponent } from './components/search/search.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    // NgbModal
+    NgbModal
   ],
   providers: [],
   bootstrap: [AppComponent]
