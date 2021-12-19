@@ -1,7 +1,7 @@
+import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
-import { ProductCategory } from 'src/app/common/product-category';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -17,7 +17,8 @@ import { SearchComponent } from './components/search/search.component';
     ProductListComponent,
     ProductCategoryMenuComponent,
     SearchComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    CartStatusComponent
   ],
   imports: [
     BrowserModule,
