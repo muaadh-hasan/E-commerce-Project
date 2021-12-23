@@ -1,0 +1,17 @@
+<div class="login-status-header">
+
+    <div *ngIf="isAuthenticated" class="login-status-user-info">
+        Welcome back!!
+    </div>
+
+    
+    <div class="p-2" >
+        <button *ngIf="!isAuthenticated" routerLink="/signin" class="security-btn">Login</button>
+    </div>
+    <!-- <div class="p-2">
+        <button *ngIf="!isAuthenticated" routerLink="/signup" class="security-btn">Register</button>
+    </div> -->
+
+    <button *ngIf="isAuthenticated" (click)="logout()" class="security-btn">Logout</button>
+
+</div>

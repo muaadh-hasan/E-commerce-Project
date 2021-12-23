@@ -16,13 +16,14 @@ export class MRFormService {
 
   constructor(private httpClient: HttpClient) { }
 
+  //////////////////////////////////////////////////////////
   getCountries(): Observable<Country[]> {
 
     return this.httpClient.get<GetResponseCountries>(this.countriesUrl).pipe(
       map(response => response._embedded.countries)
     );
   }
-
+//////////////////////////////////////////////////////////
   getStates(theCountryCode: string): Observable<State[]> {
 
     // search url
@@ -32,9 +33,7 @@ export class MRFormService {
       map(response => response._embedded.states)
     );
   }
-
-
-
+//////////////////////////////////////////////////////////
   getCreditCardMonths(startMonth: number): Observable<number[]> {
 
     let data: number[] = [];
@@ -48,7 +47,7 @@ export class MRFormService {
 
     return of(data);
   }
-
+//////////////////////////////////////////////////////////
   getCreditCardYears(): Observable<number[]> {
 
     let data: number[] = [];
@@ -65,7 +64,7 @@ export class MRFormService {
 
     return of(data);
   }
-
+//////////////////////////////////////////////////////////
 }
 
 

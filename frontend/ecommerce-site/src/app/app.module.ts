@@ -12,6 +12,9 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 import { SearchComponent } from './components/search/search.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SigninComponent } from './components/signin/signin.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { SigninStatusComponent } from './components/signin-status/signin-status.component';
 // import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -23,7 +26,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProductDetailsComponent,
     CartStatusComponent,
     CartDetailsComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    SigninComponent,
+    SignupComponent,
+    SigninStatusComponent
   ],
   imports: [
     BrowserModule,

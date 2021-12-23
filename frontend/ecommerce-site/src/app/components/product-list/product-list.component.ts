@@ -22,17 +22,17 @@ export class ProductListComponent implements OnInit {
   thePageSize: number = 5;
   theTotalElements: number = 0;
 
-
+//////////////////////////////////////////////////////////
   constructor(private productService: ProductService,
               private cartService : CartService,
               private route: ActivatedRoute) { }
-
+//////////////////////////////////////////////////////////
   ngOnInit() {
     this.route.paramMap.subscribe(() => {
       this.listProducts();
     });
   }
-
+//////////////////////////////////////////////////////////
   listProducts() {
 
     this.searchMode = this.route.snapshot.paramMap.has('keyword');
@@ -45,7 +45,7 @@ export class ProductListComponent implements OnInit {
     }
 
   }
-
+//////////////////////////////////////////////////////////
   handleSearchProducts() {
 
     const theKeyword : string = String(this.route.snapshot.paramMap.get('keyword'));
@@ -57,8 +57,7 @@ export class ProductListComponent implements OnInit {
       }
     )
   }
-
-
+//////////////////////////////////////////////////////////
   handleListProducts() {
 
     // check if "id" parameter is available
@@ -80,27 +79,19 @@ export class ProductListComponent implements OnInit {
       }
     )
   }
-
-
-
-
+//////////////////////////////////////////////////////////
   updatePageSize(event:number) {
-
-    console.log(event);
+    // console.log(event);
     this.thePageSize = event;
     this.thePageNumber = 1;
     this.listProducts();
   }
-
-
+//////////////////////////////////////////////////////////
   addToCart(theProduct: Product) {
-
-    console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
-
+    // console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
     const theCartItem = new CartItem(theProduct);
-
     this.cartService.addToCart(theCartItem);
   }
-
+//////////////////////////////////////////////////////////
 
 }

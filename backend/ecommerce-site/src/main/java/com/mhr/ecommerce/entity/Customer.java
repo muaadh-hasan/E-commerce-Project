@@ -2,6 +2,7 @@ package com.mhr.ecommerce.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -34,16 +35,15 @@ public class Customer {
     private String role;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Order> orders = new HashSet<>();
 
     public void add(Order order) {
 
         if (order != null) {
-
             if (orders == null) {
                 orders = new HashSet<>();
             }
-
             orders.add(order);
             order.setCustomer(this);
         }
