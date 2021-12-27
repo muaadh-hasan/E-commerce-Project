@@ -4,14 +4,19 @@
         Welcome back!!
     </div>
 
-    
+
     <div class="p-2" >
-        <button *ngIf="!isAuthenticated" routerLink="/signin" class="security-btn">Login</button>
+        <a *ngIf="!isAuthenticated" routerLink="/signin" >Login</a>
+
     </div>
+    <div class="p-2">
+      <a *ngIf="!isAuthenticated" routerLink="/signup" >Register</a>
+    </div>
+
     <!-- <div class="p-2">
         <button *ngIf="!isAuthenticated" routerLink="/signup" class="security-btn">Register</button>
     </div> -->
 
-    <button *ngIf="isAuthenticated" (click)="logout()" class="security-btn">Logout</button>
+    <div class="p-2"><a *ngIf="isAuthenticated" (click)="logout()" class="security-btn">Logout</a></div>
 
 </div>

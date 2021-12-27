@@ -11,7 +11,7 @@ import { MyValidators } from 'src/app/validators/my-validators';
 })
 export class SigninComponent implements OnInit {
 
-  checkoutFormGroup: FormGroup;
+  loginFormGroup: FormGroup;
 
 
   customers: Customer[] = [];
@@ -22,14 +22,9 @@ export class SigninComponent implements OnInit {
   //////////////////////////////////////////////////////////////////
   ngOnInit(): void {
 
-    this.checkoutFormGroup = this.formBuilder.group({
-      customer: this.formBuilder.group({
-        firstName: new FormControl('',
-          [Validators.required,
-          Validators.minLength(2),
-          MyValidators.notOnlyWhitespace]),
-
-        lastName: new FormControl('',
+    this.loginFormGroup = this.formBuilder.group({
+      loginForm: this.formBuilder.group({
+        Password: new FormControl('',
           [Validators.required,
           Validators.minLength(2),
           MyValidators.notOnlyWhitespace]),
@@ -48,9 +43,8 @@ export class SigninComponent implements OnInit {
 
   }
   ///////////////////////////////////////////////////////////////////
-  get firstName() { return this.checkoutFormGroup.get('customer.firstName'); }
-  get lastName() { return this.checkoutFormGroup.get('customer.lastName'); }
-  get email() { return this.checkoutFormGroup.get('customer.email'); }
+  get email() { return this.loginFormGroup.get('loginForm.email'); }
+  get Password() { return this.loginFormGroup.get('loginForm.Password'); }
   //////////////////////////////////////////////////////////////////
 
   getUsers() {

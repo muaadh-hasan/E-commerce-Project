@@ -13,8 +13,8 @@ import { ProductCategoryMenuComponent } from './components/product-category-menu
 import { SearchComponent } from './components/search/search.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SigninComponent } from './components/signin/signin.component';
-import { SignupComponent } from './components/signup/signup.component';
 import { SigninStatusComponent } from './components/signin-status/signin-status.component';
+import { SignupComponent } from './components/signup/signup.component';
 // import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({

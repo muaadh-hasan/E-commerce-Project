@@ -35,7 +35,6 @@ public class Customer {
     private String role;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    @JsonIgnore
     private Set<Order> orders = new HashSet<>();
 
     public void add(Order order) {
