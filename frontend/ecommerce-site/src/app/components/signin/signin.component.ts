@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Customer } from 'src/app/common/customer';
+import { SignInData } from 'src/app/common/signInData';
 import { AuthService } from 'src/app/services/auth.service';
 import { MyValidators } from 'src/app/validators/my-validators';
 
@@ -13,18 +15,20 @@ export class SigninComponent implements OnInit {
 
   loginFormGroup: FormGroup;
 
+  customer : Customer;
 
-  customers: Customer[] = [];
+
+  // customers: Customer[] = [];
 
   //////////////////////////////////////////////////////////////////
   constructor(private formBuilder: FormBuilder,
-    private authService: AuthService) { }
+    private authService: AuthService , private router: Router) { }
   //////////////////////////////////////////////////////////////////
   ngOnInit(): void {
 
     this.loginFormGroup = this.formBuilder.group({
       loginForm: this.formBuilder.group({
-        Password: new FormControl('',
+        password: new FormControl('',
           [Validators.required,
           Validators.minLength(2),
           MyValidators.notOnlyWhitespace]),
@@ -34,31 +38,50 @@ export class SigninComponent implements OnInit {
       })
     });
 
+    this.authService.currentCustomer.subscribe(data => this.customer = data);
 
-    this.getUsers();
-
-    for (let i = 0; i < this.customers.length; i++) {
-      console.log(this.customers[i].firstName);
-    }
 
   }
   ///////////////////////////////////////////////////////////////////
   get email() { return this.loginFormGroup.get('loginForm.email'); }
-  get Password() { return this.loginFormGroup.get('loginForm.Password'); }
+  get password() { return this.loginFormGroup.get('loginForm.password'); }
   //////////////////////////////////////////////////////////////////
 
-  getUsers() {
-    // if (this.isAuthenticated) {
-    //   this.customer = this.authService.;
-    // }
-    this.authService.getUsers().subscribe(
-      data => {
-        this.customers = data;
-      }
-    );
-  }
+  // getUsers() {
+  //   this.authService.getUsers().subscribe(
+  //     data => {
+  //       this.customers = data;
+
+  //       console.log("Retrieved customers: " + JSON.stringify(data));
+  //     }
+  //   );
+  // }
   //////////////////////////////////////////////////////////////////
-  onSubmit() { }
+  onSubmit() {
+
+    let signInData = new SignInData();
+
+    signInData = this.loginFormGroup.controls['loginForm'].value;
+
+    this.authService.signIn(signInData).subscribe({
+      next : response => {
+
+        console.log("response Login: " + JSON.stringify(response));
+        if(response != null){
+          this.authService.currentCustomer.next(response);
+          this.authService.authenticationState.next(true);
+          alert(`Successful login!, Welcome : ${this.customer.firstName}`);
+          this.router.navigateByUrl("/products");
+        }else{
+          alert(`login is failed!, check email or password is wrong.`);
+        }
+      },
+      error: err => {
+        alert(`There was an error: ${err.message}`);
+      }
+    })
+
+   }
   //////////////////////////////////////////////////////////////////
 
 

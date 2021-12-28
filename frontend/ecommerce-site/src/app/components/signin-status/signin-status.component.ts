@@ -9,9 +9,6 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SigninStatusComponent implements OnInit {
 
-  customer : Customer;
-
-  customers :Customer[];
 
   isAuthenticated: boolean = false;
 
@@ -19,29 +16,16 @@ export class SigninStatusComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Subscribe to authentication state changes
     this.authService.authenticationState.subscribe(
       (result) => {
         this.isAuthenticated = result;
-        // this.getUserDetails();
       }
     );
-    
+
   }
 
-  getUsers() {
-    // if (this.isAuthenticated) {
-    //   this.customer = this.authService.;
-    // }
-    this.authService.getUsers().subscribe(
-      data => {
-        this.customers = data;
-      }
-    );
-  }
 
   logout() {
-    // Terminates the session with Okta and removes current tokens.
     this.authService.signOut();
   }
 

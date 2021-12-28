@@ -32,8 +32,8 @@ export class CheckoutComponent implements OnInit {
 
 
 ///////////////////////////////////////////////////////////////
-  constructor(private formBuilder: FormBuilder , 
-              private mRFormService:MRFormService, 
+  constructor(private formBuilder: FormBuilder ,
+              private mRFormService:MRFormService,
               private cartService: CartService,
               private checkoutService: CheckoutService,
               private router: Router) { }
@@ -123,7 +123,7 @@ export class CheckoutComponent implements OnInit {
   get creditCardNameOnCard() { return this.checkoutFormGroup.get('creditCard.nameOnCard'); }
   get creditCardNumber() { return this.checkoutFormGroup.get('creditCard.cardNumber'); }
   get creditCardSecurityCode() { return this.checkoutFormGroup.get('creditCard.securityCode'); }
- 
+
 ///////////////////////////////////////////////////////////////
   handleMonthsAndYears() {
 
@@ -200,12 +200,12 @@ export class CheckoutComponent implements OnInit {
 
     // set up purchase
     let purchase = new Purchase();
-    
+
     // populate purchase - customer
     purchase.customer = this.checkoutFormGroup.controls['customer'].value;
     purchase.customer.password = "123456";
     purchase.customer.role = 'user';
-    
+
     // populate purchase - shipping address
     purchase.address = this.checkoutFormGroup.controls['address'].value;
     const state: State = JSON.parse(JSON.stringify(purchase.address.state));
@@ -223,10 +223,8 @@ export class CheckoutComponent implements OnInit {
     this.checkoutService.placeOrder(purchase).subscribe({
         next: response => {
           alert(`Your order has been received.\nOrder tracking number: ${response.orderTrackingNumber}`);
-
           // reset cart
           this.resetCart();
-
         },
         error: err => {
           alert(`There was an error: ${err.message}`);
@@ -241,7 +239,7 @@ export class CheckoutComponent implements OnInit {
     this.cartService.cartItems = [];
     this.cartService.totalPrice.next(0);
     this.cartService.totalQuantity.next(0);
-    
+
     // reset the form
     this.checkoutFormGroup.reset();
 

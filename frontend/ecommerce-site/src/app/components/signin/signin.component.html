@@ -35,11 +35,11 @@
                         <div class="col-md-2"> <label>Password</label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <input formControlName="Password" type="text">
+                                <input formControlName="password" type="text">
 
-                                <div *ngIf="Password.invalid && (Password.dirty || Password.touched)" class="alert alert-danger mt-1">
+                                <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger mt-1">
 
-                                    <div *ngIf="Password.errors['required'] || Password.errors['notOnlyWhitespace']">
+                                    <div *ngIf="password.errors['required'] || password.errors['notOnlyWhitespace']">
                                         Password is required
                                     </div>
 
