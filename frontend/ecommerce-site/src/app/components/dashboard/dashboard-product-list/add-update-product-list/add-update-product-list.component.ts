@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { first } from 'rxjs';
 import { Product } from 'src/app/common/product';
 import { ProductCategory } from 'src/app/common/product-category';
+import { FileUploadService } from 'src/app/services/file-upload.service';
 import { ProductService } from 'src/app/services/product.service';
 import { MyValidators } from 'src/app/validators/my-validators';
-import { pathToFileURL } from 'url';
 
 @Component({
   selector: 'app-add-update-product-list',
@@ -14,6 +14,11 @@ import { pathToFileURL } from 'url';
   styleUrls: ['./add-update-product-list.component.css']
 })
 export class AddUpdateProductListComponent implements OnInit {
+
+  // Variable to store shortLink from api response
+  shortLinkImage: string = "";
+  loading: boolean = false; // Flag variable
+  file: File = null; // Variable to store file
 
   productFormGroup: FormGroup;
 
@@ -26,11 +31,13 @@ export class AddUpdateProductListComponent implements OnInit {
   category : ProductCategory;
 
 
+
   //////////////////////////////////////////////////////////////////
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private productService: ProductService,
     private route: ActivatedRoute,
+    private fileUploadService: FileUploadService
     ) { }
   //////////////////////////////////////////////////////////////////
   ngOnInit() {
@@ -138,19 +145,26 @@ export class AddUpdateProductListComponent implements OnInit {
     }
 
   }
-  //////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+
   onSubmit() {
+
+    // this.fileUploadService.postFile(this.file).subscribe(
+    //   res => console.log('resssss of image :' + res));
 
     if(this.productFormGroup.invalid){
       return
     }
 
-    if(this.editMode){
-      this.updateProduct();
-    }
-    else{
-      this.addProduct();
-    }
+    console.log('before add or edit : '+ JSON.stringify(this.productFormGroup.value));
+
+    // if(this.editMode){
+    //   this.updateProduct();
+    // }
+    // else{
+    //   this.addProduct();
+    // }
   }
   ///////////////////////////////////////////////////////
   addProduct() {
@@ -178,9 +192,10 @@ export class AddUpdateProductListComponent implements OnInit {
   }
 /////////////////////////////////////////////////////////
 // C:\Users\Moaaz\Documents\GitHub\E-commerce-Project\frontend\ecommerce-site\src\assets\images\products
-imageUploaded(event:Event){
-  console.log('Imaaggggeee : '+this.productFormGroup.controls['imageUrl'].value);
-  console.log('Imaaggggeee event : '+ event);
+imageUploaded(event){
+  // console.log('Imaaggggeee : '+this.productFormGroup.controls['imageUrl'].value);
+  console.log('Imaaggggeee event : '+ event.target);
+  this.file = event.target.files[0];
 }
-
+///////////////////////////////////////////////////////
 }

@@ -16,7 +16,7 @@ export class AuthService {
 
   authenticationState = new BehaviorSubject<boolean>(false);
   currentCustomer = new BehaviorSubject<Customer>(null);
-  userIsAdmin = new BehaviorSubject<boolean>(true);
+  userIsAdmin = new BehaviorSubject<boolean>(false);
 
   constructor(private httpClient: HttpClient) {}
 
