@@ -1,0 +1,77 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+
+      <h1>Orders</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="width: 15%">Order Tracking Number</th>
+            <th style="width: 10%">Total Quantity</th>
+            <th style="width: 10%">Total Price</th>
+            <th style="width: 55%">Details</th>
+            <th style="width: 10%">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+
+            <td>{{order.orderTrackingNumber}}</td>
+            <td>{{order.totalQuantity}}</td>
+            <td>{{order.totalPrice | currency: 'USD' }}</td>
+
+            <!-- Details -->
+
+            <td>
+
+              <div *ngIf="order.orderItems.length > 0">
+
+                <table class="table table-bordered">
+                  <tr>
+                    <th width="50%">Quantity</th>
+                    <th width="20%">Unit Price</th>
+                    <!-- <th width="30%">Product Name</th> -->
+                  </tr>
+
+                  <tr *ngFor="let tempOrderItems of order.orderItems">
+                    <td>
+                      <p>{{ tempOrderItems.quantity }}</p>
+                    </td>
+                    <td>
+                      <p>{{ tempOrderItems.unitPrice | currency: 'USD' }}</p>
+                    </td>
+                    <!-- <td>
+                      <p> {{ tempOrderItems.productId }} </p>
+                    </td> -->
+                  </tr>
+
+
+                </table>
+
+              </div>
+
+            </td>
+
+            <!-- End Details -->
+
+            <td style="white-space: nowrap">
+              <!-- <a routerLink="/editUser/{{order.id}}" class="btn btn-sm btn-info mr-1"><i class="fas fa-edit"> Edit </i></a> -->
+              <button class="btn btn-sm btn-danger btn-delete-user">
+                <span><i class="fas fa-trash" (click)="deleteOrder(order.id)"> Delete </i></span>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="!orders">
+            <td colspan="4" class="text-center">
+              <span>No orders to load!</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+
+    </div>
+  </div>
+</div>

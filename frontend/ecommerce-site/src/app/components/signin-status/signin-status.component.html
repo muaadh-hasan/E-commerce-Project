@@ -1,16 +1,19 @@
 <div class="login-status-header">
 
-    <div class="p-2" >
-        <a *ngIf="!isAuthenticated" routerLink="/signin" >Login</a>
 
-    </div>
-    <div class="p-2">
-      <a *ngIf="!isAuthenticated" routerLink="/signup" >Register</a>
-    </div>
+  <ul class="list-unstyled navbar-list">
+    <li>
+      <a *ngIf="!isAuthenticated" routerLink="/signin"> <i class="fas fa-sign-in-alt"> Login</i></a>
+    </li>
+    <li>
+      <a *ngIf="!isAuthenticated" routerLink="/signup"> <i class="fas fa-user-plus"> Register</i></a>
+    </li>
+    <li>
+      <a style="cursor: pointer; color: blue;" *ngIf="isAuthenticated" (click)="logout()"><i class="fas fa-sign-out-alt"> Logout</i></a>
+    </li>
+  </ul>
 
 
-    <div class="p-2">
-      <a style="cursor: pointer; color: blue;" *ngIf="isAuthenticated"  (click)="logout()" >Logout</a>
-    </div>
+
 
 </div>

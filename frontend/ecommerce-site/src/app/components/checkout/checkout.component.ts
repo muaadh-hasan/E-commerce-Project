@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { Order } from 'src/app/common/order';
 import { OrderItem } from 'src/app/common/order-item';
 import { Purchase } from 'src/app/common/purchase';
+import { Customer } from 'src/app/common/customer';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-checkout',
@@ -30,33 +32,42 @@ export class CheckoutComponent implements OnInit {
 
   addressStates: State[] = [];
 
+  customer = new Customer();
+
 
 ///////////////////////////////////////////////////////////////
   constructor(private formBuilder: FormBuilder ,
               private mRFormService:MRFormService,
               private cartService: CartService,
               private checkoutService: CheckoutService,
+              private authService : AuthService,
               private router: Router) { }
 ///////////////////////////////////////////////////////////////
   ngOnInit(): void {
 
     this.reviewCartDetails();
 
+    this.authService.currentCustomer.subscribe(data=> this.customer = data);
+
     this.checkoutFormGroup = this.formBuilder.group({
-      customer: this.formBuilder.group({
-        firstName: new FormControl('',
-                              [Validators.required,
-                               Validators.minLength(2),
-                               MyValidators.notOnlyWhitespace]),
 
-        lastName:  new FormControl('',
-                              [Validators.required,
-                               Validators.minLength(2),
-                               MyValidators.notOnlyWhitespace]),
+      // customer: this.formBuilder.group(
+      //   {
+      //   firstName: new FormControl('',
+      //                         [Validators.required,
+      //                          Validators.minLength(2),
+      //                          MyValidators.notOnlyWhitespace]),
 
-        email: new FormControl('',
-                              [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
-      }),
+      //   lastName:  new FormControl('',
+      //                         [Validators.required,
+      //                          Validators.minLength(2),
+      //                          MyValidators.notOnlyWhitespace]),
+
+      //   email: new FormControl('',
+      //                         [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
+      // }
+      // ),
+
       address: this.formBuilder.group({
         street: new FormControl('', [Validators.required, Validators.minLength(2),
                                      MyValidators.notOnlyWhitespace]),
@@ -109,9 +120,9 @@ export class CheckoutComponent implements OnInit {
 
   }
 ///////////////////////////////////////////////////////////////
-  get firstName() { return this.checkoutFormGroup.get('customer.firstName'); }
-  get lastName() { return this.checkoutFormGroup.get('customer.lastName'); }
-  get email() { return this.checkoutFormGroup.get('customer.email'); }
+  // get firstName() { return this.checkoutFormGroup.get('customer.firstName'); }
+  // get lastName() { return this.checkoutFormGroup.get('customer.lastName'); }
+  // get email() { return this.checkoutFormGroup.get('customer.email'); }
 ///////////////////////////////////////////////////////////////
   get addressStreet() { return this.checkoutFormGroup.get('address.street'); }
   get addressCity() { return this.checkoutFormGroup.get('address.city'); }
@@ -126,25 +137,18 @@ export class CheckoutComponent implements OnInit {
 
 ///////////////////////////////////////////////////////////////
   handleMonthsAndYears() {
-
     const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
-
     const currentYear: number = new Date().getFullYear();
     const selectedYear: number = Number(creditCardFormGroup!.value.expirationYear);
 
-
-
     // if the current year equals the selected year, then start with the current month
-
     let startMonth: number;
-
     if (currentYear === selectedYear) {
       startMonth = new Date().getMonth() + 1;
     }
     else {
       startMonth = 1;
     }
-
     this.mRFormService.getCreditCardMonths(startMonth).subscribe(
       data => {
         console.log("Retrieved credit card months: " + JSON.stringify(data));
@@ -202,9 +206,11 @@ export class CheckoutComponent implements OnInit {
     let purchase = new Purchase();
 
     // populate purchase - customer
-    purchase.customer = this.checkoutFormGroup.controls['customer'].value;
-    purchase.customer.password = "123456";
-    purchase.customer.role = 'user';
+    // purchase.customer = this.checkoutFormGroup.controls['customer'].value;
+    // purchase.customer.password = "123456";
+    // purchase.customer.role = 'user';
+
+    purchase.customer = this.customer;
 
     // populate purchase - shipping address
     purchase.address = this.checkoutFormGroup.controls['address'].value;

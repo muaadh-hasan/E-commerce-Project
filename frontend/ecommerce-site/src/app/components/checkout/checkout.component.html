@@ -4,7 +4,7 @@
 
           <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
 
-              <!-- customer form group -->
+              <!-- customer form group
               <div formGroupName="customer" class="form-area">
                   <h3>Customer</h3>
 
@@ -73,7 +73,7 @@
                       </div>
                   </div>
 
-              </div>
+              </div> -->
 
               <!-- Address -->
               <div formGroupName="address" class="form-area">
@@ -138,7 +138,9 @@
                   </div>
 
                   <div class="row">
-                      <div class="col-md-2"> <label>State</label></div>
+                      <div class="col-md-2">
+                        <label>State</label>
+                      </div>
                       <div class="col-md-9">
                           <div class="input-space">
                               <select formControlName="state">
@@ -163,8 +165,8 @@
                           <div class="input-space">
                               <input formControlName="zipCode" type="text">
 
-                              <div *ngIf="addressZipCode.invalid 
-                                        && (addressZipCode.dirty || addressZipCode.touched)" 
+                              <div *ngIf="addressZipCode.invalid
+                                        && (addressZipCode.dirty || addressZipCode.touched)"
                                         class="alert alert-danger mt-1">
                                   <div *ngIf="addressZipCode.errors['required'] || addressZipCode.errors['notOnlyWhitespace']">
                                       Zip code is required

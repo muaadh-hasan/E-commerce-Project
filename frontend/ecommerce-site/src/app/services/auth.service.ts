@@ -16,6 +16,7 @@ export class AuthService {
 
   authenticationState = new BehaviorSubject<boolean>(false);
   currentCustomer = new BehaviorSubject<Customer>(null);
+  userIsAdmin = new BehaviorSubject<boolean>(true);
 
   constructor(private httpClient: HttpClient) {}
 
@@ -38,6 +39,7 @@ export class AuthService {
   signOut() {
     this.authenticationState.next(false);
     this.currentCustomer.next(null);
+    this.userIsAdmin.next(false);
   }
 
   register(customer : Customer){

@@ -1,0 +1,24 @@
+<div *ngIf="isAdmin">
+
+  <hr>
+
+  <ul class="list-unstyled navbar-list"> <i class="fas fa-user-cog"> Dashboard</i>
+
+    <!-- <a class="" routerLink="/dashboard" routerLinkActive="active-link" >   </a> -->
+
+
+    <li class="list-unstyled navbar-list">
+      <a class="nav-item nav-link" routerLink="/dashboard-product-List" routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{exact: true}">Products</a>
+    </li>
+    <li class="list-unstyled navbar-list">
+      <a class="nav-item nav-link" routerLink="/dashboard-users" routerLinkActive="active-link">Users</a>
+    </li>
+
+  </ul>
+
+
+
+
+
+</div>

@@ -12,11 +12,4 @@ export class OrderItem {
         this.unitPrice = cartItem.unitPrice;
         this.productId = cartItem.id;
     }
-
-    displayInfo(){
-        console.log("imageUrl --> " + this.imageUrl);
-        console.log("lastName --> " + this.quantity);
-        console.log("unitPrice --> " + this.unitPrice);
-        console.log("productId --> " +this.productId);
-    }
 }

@@ -1,0 +1,42 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+
+
+      <h1>Users</h1>
+      <a routerLink="/addUser" class="btn btn-sm btn-success mb-2"><i class="fas fa-user-plus"> Add User </i></a>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="width: 30%">Name</th>
+            <th style="width: 30%">Email</th>
+            <th style="width: 30%">Role</th>
+            <th style="width: 10%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.firstName}} {{user.lastName}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.role}}</td>
+            <td style="white-space: nowrap">
+              <a routerLink="/editUser/{{user.id}}" class="btn btn-sm btn-info mr-1"><i class="fas fa-edit"> Edit </i></a>
+              <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user"
+                [disabled]="user.isDeleting">
+                <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
+                <span *ngIf="!user.isDeleting"><i class="fas fa-trash"> Delete </i></span>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="!users">
+            <td colspan="4" class="text-center">
+              <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+</div>

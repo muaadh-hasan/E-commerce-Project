@@ -249,6 +249,13 @@ input.au-input.au-input-xl{
   margin-left:15px
 }
 
+.orders-area i{
+  font-size:18px;
+  /* float:left; */
+  color:rgb(255, 255, 255);
+  margin-left:500px
+}
+
 .total{
   background:#205b8d;
   line-height:43px;

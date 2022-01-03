@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Customer } from 'src/app/common/customer';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -12,7 +13,7 @@ export class SigninStatusComponent implements OnInit {
 
   isAuthenticated: boolean = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,private router: Router) { }
 
   ngOnInit(): void {
 
@@ -27,6 +28,7 @@ export class SigninStatusComponent implements OnInit {
 
   logout() {
     this.authService.signOut();
+    this.router.navigateByUrl("/products");
   }
 
 

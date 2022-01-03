@@ -14,11 +14,7 @@ import { MyValidators } from 'src/app/validators/my-validators';
 export class SigninComponent implements OnInit {
 
   loginFormGroup: FormGroup;
-
   customer : Customer;
-
-
-  // customers: Customer[] = [];
 
   //////////////////////////////////////////////////////////////////
   constructor(private formBuilder: FormBuilder,
@@ -40,22 +36,10 @@ export class SigninComponent implements OnInit {
 
     this.authService.currentCustomer.subscribe(data => this.customer = data);
 
-
   }
   ///////////////////////////////////////////////////////////////////
   get email() { return this.loginFormGroup.get('loginForm.email'); }
   get password() { return this.loginFormGroup.get('loginForm.password'); }
-  //////////////////////////////////////////////////////////////////
-
-  // getUsers() {
-  //   this.authService.getUsers().subscribe(
-  //     data => {
-  //       this.customers = data;
-
-  //       console.log("Retrieved customers: " + JSON.stringify(data));
-  //     }
-  //   );
-  // }
   //////////////////////////////////////////////////////////////////
   onSubmit() {
 
@@ -70,6 +54,7 @@ export class SigninComponent implements OnInit {
         if(response != null){
           this.authService.currentCustomer.next(response);
           this.authService.authenticationState.next(true);
+          this.authService.userIsAdmin.next(response.role == 'admin');
           alert(`Successful login!, Welcome : ${this.customer.firstName}`);
           this.router.navigateByUrl("/products");
         }else{
@@ -83,9 +68,6 @@ export class SigninComponent implements OnInit {
 
    }
   //////////////////////////////////////////////////////////////////
-
-
-
 }
 
 

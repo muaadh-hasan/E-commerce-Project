@@ -5,6 +5,7 @@ export class Customer {
     email: string;
     password: string;
     role: string;
+    isDeleting: boolean;
 
 
 }

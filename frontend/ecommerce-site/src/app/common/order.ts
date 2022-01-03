@@ -1,9 +1,13 @@
-export class Order {
-    totalQuantity: number;
-    totalPrice: number;
+import { OrderItem } from "./order-item";
 
-    displayInfo(){
-        console.log("totalQuantity --> " + this.totalQuantity);
-        console.log("totalPrice --> " + this.totalPrice);
-    }
+export class Order {
+  id : number;
+  orderTrackingNumber:string;
+  totalQuantity: number;
+  totalPrice: number;
+  status:string;
+  dateCreated : Date;
+  lastUpdated : Date;
+  orderItems: OrderItem[];
+
 }

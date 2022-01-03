@@ -2,8 +2,9 @@ import { CartService } from 'src/app/services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/common/product';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartItem } from 'src/app/common/cart-item';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-product-list',
@@ -22,15 +23,22 @@ export class ProductListComponent implements OnInit {
   thePageSize: number = 5;
   theTotalElements: number = 0;
 
+  authState : boolean = false;
+
 //////////////////////////////////////////////////////////
   constructor(private productService: ProductService,
               private cartService : CartService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute ,
+              private authService : AuthService,
+              private router : Router) { }
 //////////////////////////////////////////////////////////
   ngOnInit() {
     this.route.paramMap.subscribe(() => {
       this.listProducts();
     });
+
+    this.authService.authenticationState.subscribe(data => this.authState = data);
+
   }
 //////////////////////////////////////////////////////////
   listProducts() {
@@ -89,8 +97,17 @@ export class ProductListComponent implements OnInit {
 //////////////////////////////////////////////////////////
   addToCart(theProduct: Product) {
     // console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
-    const theCartItem = new CartItem(theProduct);
-    this.cartService.addToCart(theCartItem);
+
+    if(this.authState){
+      const theCartItem = new CartItem(theProduct);
+      this.cartService.addToCart(theCartItem);
+    }
+    else {
+      alert("You have to login first!");
+      this.router.navigateByUrl("/signin");
+    }
+
+
   }
 //////////////////////////////////////////////////////////
 

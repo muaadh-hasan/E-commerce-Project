@@ -1,0 +1,49 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+
+      <div class="row-5  p-3">
+        <button routerLink="/product-update" class="btn btn-success btn-sm ">
+          Add Product <i class="fas fa-plus-circle"></i> </button>
+      </div>
+
+      <table class="table table-bordered">
+        <tr>
+          <th width="30%">Product Image</th>
+          <th width="50%">Product Detail</th>
+          <th width="15%"></th>
+        </tr>
+
+        <tr *ngFor="let element of products">
+          <td>
+            <img src="{{ element.imageUrl }}" class="img-responsive" width="150px" />
+          </td>
+          <td>
+            <p>{{ element.name }}</p>
+            <p>{{ element.unitPrice | currency: 'USD' }}</p>
+          </td>
+          <td>
+            <div class="items">
+              <div class="row no-gutters">
+                <div class="col">
+                  <a routerLink="/product-update/{{ element.id }}" class="btn btn-info btn-sm ">
+                     <i class="fas fa-edit"> Edit </i> </a>
+                  <a class="btn btn-danger btn-sm" (click)="deleteProduct(element.id)">
+                     <i class="fas fa-trash"> Delete </i> </a>
+                </div>
+
+              </div>
+            </div>
+          </td>
+        </tr>
+
+
+
+
+
+      </table>
+
+
+    </div>
+  </div>
+</div>

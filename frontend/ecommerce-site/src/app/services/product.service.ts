@@ -10,6 +10,8 @@ import { ProductCategory } from '../common/product-category';
 })
 export class ProductService {
 
+
+
   private baseUrl = 'http://localhost:8080/api/products';
 
   private categoryUrl = 'http://localhost:8080/api/product-category';
@@ -41,6 +43,10 @@ export class ProductService {
     return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(map(response => response._embedded.products));
   }
 /////////////////////////////////////////////////////////////////
+ getAllProducts(): Observable<Product[]> {
+  return this.httpClient.get<GetResponseProducts>(this.baseUrl + "?size=500").pipe(map(response => response._embedded.products));
+}
+/////////////////////////////////////////////////////////////////
   getProduct(theProductId: number): Observable<Product> {
     // need to build URL based on product id
     const productUrl = `${this.baseUrl}/${theProductId}`;
@@ -58,7 +64,21 @@ export class ProductService {
     return this.httpClient.get<GetResponseProducts>(searchUrl);
   }
 /////////////////////////////////////////////////////////////////
-
+  getCategoryProductByProduct(productId : number): Observable<ProductCategory>{
+    return this.httpClient.get<ProductCategory>(`http://localhost:8080/api/products/${productId}/category`);
+  }
+/////////////////////////////////////////////////////////////////
+  remove(id: number) {
+    return this.httpClient.delete(this.baseUrl+"/"+id);
+  }
+////////////////////////////////////////////////////////////////
+  update(id: number, value: any) {
+    return this.httpClient.put(this.baseUrl + '/' + id , value);
+  }
+////////////////////////////////////////////////////////////////
+  create(value: any) {
+    return this.httpClient.post(this.baseUrl,value);
+  }
 
 
 }

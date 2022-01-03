@@ -15,6 +15,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SigninComponent } from './components/signin/signin.component';
 import { SigninStatusComponent } from './components/signin-status/signin-status.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardProductListComponent } from './components/dashboard/dashboard-product-list/dashboard-product-list.component';
+import { AddUpdateProductListComponent } from './components/dashboard/dashboard-product-list/add-update-product-list/add-update-product-list.component';
+import { DashboardUsersComponent } from './components/dashboard/dashboard-users/dashboard-users.component';
+import { AddEditUserComponent } from './components/dashboard/dashboard-users/add-edit-user/add-edit-user.component';
+import { OrdersComponent } from './components/orders/orders.component';
 // import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -29,7 +36,14 @@ import { SignupComponent } from './components/signup/signup.component';
     CheckoutComponent,
     SigninComponent,
     SignupComponent,
-    SigninStatusComponent
+    SigninStatusComponent,
+    SideBarComponent,
+    DashboardComponent,
+    DashboardProductListComponent,
+    AddUpdateProductListComponent,
+    DashboardUsersComponent,
+    AddEditUserComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,
